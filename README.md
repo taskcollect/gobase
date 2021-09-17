@@ -44,7 +44,7 @@ Gobase contains configurations for **development containers with VSCode**, so yo
 
     ```bash
     # remove links to gobase
-    $ rm -r .git/
+    $ rm -rf .git/
     # make a new repo in this folder
     $ git init
     # add your remote
