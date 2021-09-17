@@ -35,7 +35,9 @@ Gobase contains configurations for **development containers with VSCode**, so yo
 
     ```bash
     # --depth=1 means to only take commits from 1 version back (shallow copy)
-    $ git clone --depth=1 git@github.com:taskcollect/gobase.git
+    $ git clone --depth=1 git@github.com:taskcollect/gobase.git your_project_folder
+    # go into the directory
+    $ cd your_project_folder
     ```
 
 4. 🔗 Remove the links to this repository. For this, you can just remove the .git and start anew:
