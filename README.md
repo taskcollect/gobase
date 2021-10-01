@@ -66,7 +66,7 @@ Gobase contains configurations for **development containers with VSCode**, so yo
 
     3. VSCode should now be building your container!
 
-    4. Once it's done, you'll be dropped into a shell in the container as the `root` user. You also have access to Git in the container!
+    4. Once it's done, you'll be dropped into a shell in the container as the `vscode` user. You also have access to Git in the container!
 
 8. 💻 Develop to your heart's content. You should probably use `go run` for this.
 
@@ -86,7 +86,11 @@ Gobase contains configurations for **development containers with VSCode**, so yo
 9.  👍 Once you're finished with developing, you may want to test how your container
     would run in production, and set up a Docker image for this.
 
-        👉 The production-grade multistage dockerfile is the Dockerfile in the root of the entire project. Don't confuse it with the development Dockerfile in .devcontainer!
+    ---
+
+    👉 The production-grade multistage dockerfile is the Dockerfile in the root of the entire project. Don't confuse it with the development Dockerfile in .devcontainer!
+
+    ---
 
     You should prepare it with any dependencies it might need in the build stage, and play around with it until it's stable.
 
@@ -95,17 +99,21 @@ Gobase contains configurations for **development containers with VSCode**, so yo
     ```bash
     # replace your-image:version with something else.
     # you can also just omit everything past : to tag as latest
-    $ docker build . -t your-image:version
+    
+    # replace <edition> with either alpine or distroless
+    $ docker build . -f Dockerfile.<edition> -t your-image:version
     ```
 
     For example, this is how you'd tag & test the example web server for production.
     ```bash
-    # build the container image "gobase-example"
-    $ docker build . -t gobase-example
+    # build the container image "gobase-example" from the distroless variant
+    $ docker build . -f Dockerfile.distroless -t gobase-example
     # run, binding port 9000 on host to 2000 in the container
     $ docker run --rm -p 9000:2000 gobase-example
     # the app should be accessible on the host, at http://localhost:9000
     ```
+
+    You can alternatively run `make distroless` or `make alpine`. You should check out the [Makefile](./Makefile) to see what that actually does. Remember to change the image name! 
 
 
 That's it!
